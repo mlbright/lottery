@@ -5,6 +5,7 @@ import math
 
 def output(number):
     print "%.10f" % (number)
+    sys.exit()
 
 def bc(n, k):
     # binomial coefficient
