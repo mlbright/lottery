@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
 import sys
-from math import ceil
+import math
 
-def binomial_coefficient(n, k):
+def bc(n, k):
+    # binomial coefficient
     if k < 0 or k > n:
         return 0
     if k > n - k: # take advantage of symmetry
@@ -25,7 +26,7 @@ def hypergeometric(N,m,n,k):
         return 0
     if (n - k) > (N - m):
         return 0
-    return float(binomial_coefficient(m,k)) * binomial_coefficient(N-m,n-k) / binomial_coefficient(N,n)
+    return float(bc(m,k)) * bc(N-m,n-k) / bc(N,n)
 
 def solve(M,N,T,P):
     """
@@ -34,7 +35,7 @@ def solve(M,N,T,P):
     1 <= T <= 100: the number of tickets each winner is allowed to buy.
     1 <= P <= M: the number of people in your group.
     """
-    min_required_wins = int(ceil(float(P/T)))
+    min_required_wins = int(math.ceil(float(P)/float(T)))
     if min_required_wins > N:
         return 0
     prob = 0.0
