@@ -30,10 +30,6 @@ def solve(M,N,T,P):
     1 <= T <= 100: the number of tickets each winner is allowed to buy.
     1 <= P <= M: the number of people in your group.
     """
-    print M
-    print N
-    print T
-    print P
     min_required_wins = Decimal(ceil(P/T))
     if min_required_wins > N:
         return 0
