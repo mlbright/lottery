@@ -39,7 +39,7 @@ def solve(M,N,T,P):
         return 0
     prob = Decimal(0)
     for k in xrange(min_required_wins,N+1):
-        prob += hypergeometric(M,N,N,k)
+        prob += hypergeometric(M,P,N,k)
     
     print '{0:.10f}'.format(prob)
     
