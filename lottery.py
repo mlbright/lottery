@@ -42,7 +42,7 @@ def solve(M,N,T,P):
     if min_required_wins > N:
         output(0.0)
     prob = 0.0
-    for k in xrange(min_required_wins,P+1):
+    for k in xrange(min_required_wins,min(N,P)+1):
         prob += hypergeometric(M,P,N,k)
     output(prob)
     
