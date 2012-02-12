@@ -1,14 +1,18 @@
 #!/usr/bin/python
 
 import sys
-from math import factorial, ceil
-from decimal import Decimal
+from math import ceil
 
-def ncr(n,r):
-    # n choose r
-    n = Decimal(n)
-    r = Decimal(r)
-    return Decimal(factorial(n) / factorial(n - r) / factorial(r))
+def binomial_coefficient(n, k):
+    if k < 0 or k > n:
+        return 0
+    if k > n - k: # take advantage of symmetry
+        k = n - k
+    c = 1
+    for i in range(k):
+        c = c * (n - (k - (i+1)))
+        c = c // (i+1)
+    return c
 
 def hypergeometric(N,m,n,k):
     """
@@ -21,7 +25,7 @@ def hypergeometric(N,m,n,k):
         return 0
     if (n - k) > (N - m):
         return 0
-    return Decimal(ncr(m,k) * ncr(N-m,n-k) / ncr(N,n))
+    return float(binomial_coefficient(m,k)) * binomial_coefficient(N-m,n-k) / binomial_coefficient(N,n)
 
 def solve(M,N,T,P):
     """
@@ -30,14 +34,13 @@ def solve(M,N,T,P):
     1 <= T <= 100: the number of tickets each winner is allowed to buy.
     1 <= P <= M: the number of people in your group.
     """
-    min_required_wins = Decimal(ceil(P/T))
+    min_required_wins = int(ceil(float(P/T)))
     if min_required_wins > N:
         return 0
-    prob = Decimal(0)
+    prob = 0.0
     for k in xrange(min_required_wins,P+1):
         prob += hypergeometric(M,P,N,k)
-    
-    print '{0:.10f}'.format(prob)
+    print "%.10f" % (prob)
     
 
 if __name__ == "__main__":
