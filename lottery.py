@@ -3,6 +3,9 @@
 import sys
 import math
 
+def output(number):
+    print "%.10f" % (number)
+
 def bc(n, k):
     # binomial coefficient
     if k < 0 or k > n:
@@ -37,11 +40,11 @@ def solve(M,N,T,P):
     """
     min_required_wins = int(math.ceil(float(P)/float(T)))
     if min_required_wins > N:
-        return 0
+        output(0.0)
     prob = 0.0
     for k in xrange(min_required_wins,P+1):
         prob += hypergeometric(M,P,N,k)
-    print "%.10f" % (prob)
+    output(prob)
     
 
 if __name__ == "__main__":
